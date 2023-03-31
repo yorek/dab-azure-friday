@@ -1,0 +1,72 @@
+{
+  "$schema": "https://dataapibuilder.azureedge.net/schemas/v0.5.34/dab.draft.schema.json",
+  "data-source": {
+    "database-type": "mssql",
+    "options": {
+      "set-session-context": false
+    },
+    "connection-string": "@env('MSSQL')"
+  },
+  "runtime": {
+    "host": {
+      "mode": "development",
+      "authentication": {
+        "provider": "AzureAD",
+        "jwt": {
+          "issuer": "https://login.microsoftonline.com/72f988bf-86f1-41af-91ab-2d7cd011db47/v2.0/",
+          "audience": "2a3a6673-d63e-4ded-9afe-44daea485e44"
+        }
+      },
+      "cors": {
+        "origins": [ "http://127.0.0.1:5500" ],
+        "allow-credentials": true
+      }
+    }
+  },
+  "entities": {
+    "Series": {
+      "source": "dbo.series",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [ "read" ]
+        },
+        {
+          "role": "Library.Manager",
+          "actions": [ "*" ]
+        }
+      ],
+      "relationships": {
+        "books": {
+          "cardinality": "many",
+          "target.entity": "Book"
+        }
+      },
+      "rest": {
+        "path": "/series"
+      }
+    },
+    "Book": {
+      "source": "dbo.books",
+      "permissions": [
+        {
+          "role": "anonymous",
+          "actions": [ "read" ]
+        },
+        {
+          "role": "Library.Manager",
+          "actions": [ "*" ]
+        }
+      ],
+      "relationships": {
+        "series": {
+          "cardinality": "one",
+          "target.entity": "Series"
+        }
+      },
+      "rest": {
+        "path": "/books"
+      }
+    }
+  }
+}
