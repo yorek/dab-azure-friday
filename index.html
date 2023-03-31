@@ -24,7 +24,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js" crossorigin="anonymous"></script>
     <script>
         async function loadBooks() {
-            var url = "https://localhost:5001/api/books?$first=5"
+            var url = "/data-api/rest/books?$first=5"
             var response = await fetch(url) 
             var payload = await response.json();            
             return payload.value;
