@@ -34,11 +34,22 @@
       "permissions": [
         {
           "role": "anonymous",
-          "actions": [
-            "*"
-          ]
+          "actions": [ "*" ]
         }
-      ]
-    }
+      ]      
+    },
+    "Series": {
+      "source": "dbo.series",
+      "permissions": [
+        { "role": "anonymous", "actions": [ "read" ] },
+        { "role": "authenticated", "actions": [ "*" ] }
+      ],
+      "relationships": {
+        "books": {
+          "cardinality": "many",
+          "target.entity": "Book"
+        }
+      }     
+    }   
   }
 }
