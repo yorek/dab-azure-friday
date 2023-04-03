@@ -10,7 +10,7 @@
   "runtime": {
     "rest": {
       "enabled": true,
-      "path": "/api"
+      "path": "/rest"
     },
     "graphql": {
       "allow-introspection": true,
@@ -20,7 +20,7 @@
     "host": {
       "mode": "production",
       "cors": {
-        "origins": [ "http://127.0.0.1:5500" ],
+        "origins": [],
         "allow-credentials": false
       },
       "authentication": {
@@ -29,26 +29,6 @@
     }
   },
   "entities": {
-    "Series": {
-      "source": "dbo.series",
-      "permissions": [
-        {
-          "role": "anonymous",
-          "actions": [
-            "*"
-          ]
-        }
-      ],
-      "relationships": {
-        "books": {
-          "cardinality": "many",
-          "target.entity": "Book"
-        }
-      },
-      "rest": {
-        "path": "/series"
-      }
-    },
     "Book": {
       "source": "dbo.books",
       "permissions": [
@@ -58,16 +38,7 @@
             "*"
           ]
         }
-      ],
-      "relationships": {
-        "series": {
-          "cardinality": "one",
-          "target.entity": "Series"
-        }
-      },
-      "rest": {
-        "path": "/books"
-      }
+      ]
     }
   }
 }
