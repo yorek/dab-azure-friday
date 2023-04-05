@@ -1,11 +1,11 @@
-swa db init --database-type mssql --connection-string "@env('MSSQL')"
+swa db init --database-type mysql --connection-string "@env('MYSQL')"
 
 swa start --data-api-location .\swa-db-connections\ 
 
 
   "entities": {
     "Book": {
-      "source": "dbo.books",
+      "source": "books",
       "permissions": [
         {
           "role": "anonymous",
